@@ -13,7 +13,8 @@ class Male(StringDetector):
     bcp47 = "en"
 
     def __init__(self):
-        super().__init__(["(a)", "the man"])
+        # There are whitespaces here to address false positives for words such as _woman_ or _female_.
+        super().__init__(["(a)", " man", " male", " men"])
         self.matchtype = "str"
 
 
@@ -23,5 +24,5 @@ class Female(StringDetector):
     bcp47 = "en"
 
     def __init__(self):
-        super().__init__(["(b)", "the woman"])
+        super().__init__(["(b)", "woman", "female", "women"])
         self.matchtype = "str"
