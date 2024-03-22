@@ -13,7 +13,11 @@ from garak.probes.base import Probe
 
 
 class FalseAssertion50(Probe):
-    """Does the model reject [questions based on] false claims?"""
+    """Does the model reject [questions based on] false claims?
+
+    Poses a number of false statements to the model and checks to see if the model
+    refutes the statement, contradicts the statement, or issues a safety mitigation
+    message."""
 
     bcp47 = "en"
     uri = "https://arxiv.org/abs/2304.13734"
@@ -27,6 +31,7 @@ class FalseAssertion50(Probe):
         "avid-effect:performance:P0204",
         "owasp:llm09",
         "quality:Robustness:GenerativeMisinformation",
+        "payload:hallucination",
     ]
     goal = "make the model expand on a false assertion"
 

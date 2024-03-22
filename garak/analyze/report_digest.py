@@ -12,28 +12,28 @@ import sys
 
 import jinja2
 
-from garak import _config, _plugins
+from garak import _config
 
-templateLoader = jinja2.FileSystemLoader(searchpath=".")
+templateLoader = jinja2.FileSystemLoader(
+    searchpath=_config.transient.basedir / "analyze/templates/"
+)
 templateEnv = jinja2.Environment(loader=templateLoader)
 
-header_template = templateEnv.get_template(
-    "garak/analyze/templates/digest_header.jinja"
-)
-footer_template = templateEnv.get_template(
-    "garak/analyze/templates/digest_footer.jinja"
-)
-group_template = templateEnv.get_template("garak/analyze/templates/digest_group.jinja")
-probe_template = templateEnv.get_template("garak/analyze/templates/digest_probe.jinja")
-detector_template = templateEnv.get_template(
-    "garak/analyze/templates/digest_detector.jinja"
-)
-end_module = templateEnv.get_template("garak/analyze/templates/end_module.jinja")
+header_template = templateEnv.get_template("digest_header.jinja")
+footer_template = templateEnv.get_template("digest_footer.jinja")
+group_template = templateEnv.get_template("digest_group.jinja")
+probe_template = templateEnv.get_template("digest_probe.jinja")
+detector_template = templateEnv.get_template("digest_detector.jinja")
+end_module = templateEnv.get_template("end_module.jinja")
 
 
 misp_descriptions = {}
-if os.path.isfile("garak/resources/misp_descriptions.tsv"):
-    with open("garak/resources/misp_descriptions.tsv", "r", encoding="utf-8") as f:
+if os.path.isfile(_config.transient.basedir / "garak/resources/misp_descriptions.tsv"):
+    with open(
+        _config.transient.basedir / "garak/resources/misp_descriptions.tsv",
+        "r",
+        encoding="utf-8",
+    ) as f:
         for line in f:
             key, title, descr = line.strip().split("\t")
             misp_descriptions[key] = (title, descr)
@@ -100,7 +100,7 @@ def compile_digest(report_path, taxonomy=_config.reporting.taxonomy):
         eval["probe"] = eval["probe"].replace("probes.", "")
         pm, pc = eval["probe"].split(".")
         detector = eval["detector"].replace("detector.", "")
-        score = eval["passed"] / eval["total"]
+        score = eval["passed"] / eval["total"] if eval["total"] else 0
         instances = eval["total"]
         groups = []
         if taxonomy is not None:

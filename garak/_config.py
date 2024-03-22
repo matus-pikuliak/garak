@@ -33,6 +33,13 @@ class GarakSubConfig:
 
 
 @dataclass
+class BuffManager:
+    """class to store instantiated buffs"""
+
+    buffs = []
+
+
+@dataclass
 class TransientConfig(GarakSubConfig):
     """Object to hold transient global config items not set externally"""
 
@@ -57,9 +64,9 @@ plugins.generators = {}
 plugins.detectors = {}
 plugins.buffs = {}
 plugins.harnesses = {}
-reporting.report_dir = "runs"
 reporting.taxonomy = None  # set here to enable report_digest to be called directly
 
+buffmanager = BuffManager()
 
 config_files = []
 
@@ -133,6 +140,12 @@ def load_config(
         # take config file path as provided
         if os.path.isfile(run_config_filename):
             settings_files.append(run_config_filename)
+        elif os.path.isfile(
+            str(transient.basedir / "configs" / (run_config_filename + ".yaml"))
+        ):
+            settings_files.append(
+                str(transient.basedir / "configs" / (run_config_filename + ".yaml"))
+            )
         else:
             message = f"run config not found: {run_config_filename}"
             logging.error(message)

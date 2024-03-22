@@ -6,7 +6,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Documentation Status](https://readthedocs.org/projects/garak/badge/?version=latest)](http://garak.readthedocs.io/en/latest/?badge=latest)
-[![discord-img](https://img.shields.io/badge/chat-on%20discord-yellow.svg)](https://discord.gg/xH3rs3ZH4B)
+[![discord-img](https://img.shields.io/badge/chat-on%20discord-yellow.svg)](https://discord.gg/cnAJ8XgY)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/garak)](https://pypi.org/project/garak)
 [![PyPI](https://badge.fury.io/py/garak.svg)](https://badge.fury.io/py/garak)
@@ -55,7 +55,7 @@ python -m pip install -U git+https://github.com/leondz/garak.git@main
 `garak` has its own dependencies. You can to install `garak` in its own Conda environment:
 
 ```
-conda create --name garak "python>=3.9,<3.12"
+conda create --name garak "python>=3.10,<=3.12"
 conda activate garak
 gh repo clone leondz/garak
 cd garak
@@ -241,10 +241,21 @@ We have an FAQ [here](https://github.com/leondz/garak/blob/main/FAQ.md). Reach o
 
 Code reference documentation is at [garak.readthedocs.io](https://garak.readthedocs.io/en/latest/).
 
+## Citing garak
+
+```
+@misc{garak,
+  title={garak: {A Framework for Large Language Model Red Teaming}},
+  author={Leon Derczynski and Erick Galinkin and Subho Majumdar},
+  year={2024},
+  howpublished={\url{https://garak.ai}}
+}
+```
+
 <hr>
 
-_"Never tell the same lie twice"_ - Elim
+_"Lying is a skill like any other, and if you wish to maintain a level of excellence you have to practice constantly"_ - Elim
 
 For updates and news see [@garak_llm](https://twitter.com/garak_llm)
 
-© Apache v2 2023 Leon Derczynski
+© 2023- Leon Derczynski; Apache license v2, see [LICENSE](LICENSE)

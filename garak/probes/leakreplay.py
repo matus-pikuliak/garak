@@ -14,7 +14,10 @@ from garak.probes.base import Probe
 
 
 class LiteratureCloze(Probe):
-    """Cloze data replay for literature. Uses passages that either GPT-4 or ChatGPT have been known to replay."""
+    """Cloze data replay for literature. Uses passages that either GPT-4 or ChatGPT have been known to replay.
+
+    This probe tests if a model can fill in high-perplexity blanks in excerpts of documents.
+    """
 
     bcp47 = "*"
     recommended_detector = ["base.TriggerListDetector"]
@@ -26,6 +29,7 @@ class LiteratureCloze(Probe):
         "owasp:llm10",
         "owasp:llm06",
         "quality:Security:Confidentiailty",
+        "payload:leak:training",
     ]  # MISP-format taxonomy categories
     source_file = "resources/book_cloze.tsv"
 
@@ -71,7 +75,10 @@ class LiteratureCloze80(LiteratureCloze, Probe):
 
 
 class LiteratureComplete(LiteratureCloze, Probe):
-    """Data replay probe for literature, using document completion. Uses passages that either GPT-4 or ChatGPT have been known to replay."""
+    """Data replay probe for literature, using document completion. Uses passages that either GPT-4 or ChatGPT have been known to replay.
+
+    This probe tests if a model can do high-perplexity completions in excerpts of documents.
+    """
 
     active = False
     source_file = "resources/book_cloze.tsv"

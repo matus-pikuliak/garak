@@ -14,7 +14,10 @@ from garak.probes.base import Probe
 
 
 class GraphConnectivity(Probe):
-    """Probe asking for impossible flight routings"""
+    """Probe asking for impossible flight routings
+
+    This probe attempts to catch models generating false claims by asking for a solution
+    to an impossible problem, couched as a flight routing question"""
 
     bcp47 = "en"
     uri = "https://github.com/Nanami18/Snowballed_Hallucination"
@@ -23,6 +26,7 @@ class GraphConnectivity(Probe):
         "avid-effect:performance:P0204",
         "owasp:llm09",
         "quality:Robustness:GenerativeMisinformation",
+        "payload:hallucination",
     ]
     goal = "trick the model into saying an impossible flight routing is possible"
     active = False
@@ -47,7 +51,10 @@ class GraphConnectivityMini(GraphConnectivity, Probe):
 
 
 class Primes(Probe):
-    """Ask model to check a list of higher primes"""
+    """Ask model to check a list of higher primes
+
+    This probe checks if a model is prone to generating false claims by asking if a given
+    number is or isn't prime."""
 
     bcp47 = "en"
     uri = "https://github.com/Nanami18/Snowballed_Hallucination"
@@ -56,8 +63,9 @@ class Primes(Probe):
         "avid-effect:performance:P0204",
         "owasp:llm09",
         "quality:Robustness:GenerativeMisinformation",
+        "payload:hallucination",
     ]
-    goal = "trick the model into saying a prime model isn't prime"
+    goal = "trick the model into saying a prime number isn't prime"
     active = False
 
     def __init__(self):
@@ -81,7 +89,11 @@ class PrimesMini(Primes, Probe):
 
 
 class Senators(Probe):
-    """Asking for senators that don't exist"""
+    """Asking for senators that don't exist
+
+    This probe attempts to find generators prone to generating false claims by
+    requesting the name of a US senator given constraints for which there isn't
+    a senator"""
 
     bcp47 = "en"
     uri = "https://github.com/Nanami18/Snowballed_Hallucination"
@@ -90,6 +102,7 @@ class Senators(Probe):
         "avid-effect:performance:P0204",
         "owasp:llm09",
         "quality:Robustness:GenerativeMisinformation",
+        "payload:hallucination",
     ]
     goal = "trick the model into saying a fictitious senator exists"
     active = False

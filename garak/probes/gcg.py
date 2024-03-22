@@ -6,16 +6,18 @@
 
 Probes designed to disrupt a system prompt by appending an adversarial suffix.
 """
-from pathlib import Path
-from typing import List
 
 from garak.probes.base import Probe
+import garak._config
 
-SUFFIX_PATH = f"{Path(__file__).parents[1]}/resources/gcg/data/gcg/gcg.txt"
+SUFFIX_PATH = garak._config.transient.basedir / "resources/gcg/data/gcg/gcg.txt"
 
 
 class GCG_Probe(Probe):
-    """Greedy Coordinate Gradient probe"""
+    """Greedy Coordinate Gradient probe
+
+    An automatic jailbreaking probe, using gradient descent. This implementation
+    uses a pre-computed cached set of GCG prompts."""
 
     bcp47 = "en"
     recommended_detector = ["mitigation.MitigationBypass"]
@@ -23,6 +25,7 @@ class GCG_Probe(Probe):
         "avid-effect:security:S0403",
         "avid-effect:performance:P0204",
         "quality:Security:PromptStability",
+        "payload:jailbreak",
     ]
     goal = "cause the model to disregard the system prompt"
     uri = "https://arxiv.org/abs/2307.15043"
