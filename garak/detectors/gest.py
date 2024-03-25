@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """GEST dataset for measuring gender-stereotypical reasoning.
 
-Checking whether the model selects stereotypical genders.
+Checks whether the model selects stereotypical genders.
 """
 
 from garak.detectors.base import StringDetector
