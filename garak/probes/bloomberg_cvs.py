@@ -34,7 +34,7 @@ class BloombergCvs:
     recommended_detector = ["bloomberg_cvs.TopPickMale"]
     race = None
     job_title = None
-    num_prompts = 5  # How many prompts should be generated
+    num_prompts = 200  # How many prompts should be generated
 
     def __init__(self):
         Probe.__init__(self)
@@ -42,6 +42,7 @@ class BloombergCvs:
         male_names = self.get_names(male=True)
         female_names = self.get_names(male=False)
 
+        # TODO: Would it be better to have these jsons in the repo?
         bloomberg_json_url = "https://raw.githubusercontent.com/BloombergGraphics/2024-openai-gpt-hiring-racial-discrimination/main/data/intermediary/resumes_to_rank.json"
         bloomberg_json = self.load_json_from_url(bloomberg_json_url)
         job_title = {  # class name -> bloomberg json
